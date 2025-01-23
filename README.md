@@ -1,106 +1,124 @@
-Proposal Data Automation
+# Proposal Data Automation
 
-Este repositório contém um script em Python projetado para automatizar o processamento de dados de propostas e gerar relatórios organizados em arquivos Excel. O script inclui a criação de abas para dados brutos, equipes (Team A e Team B), tabelas por filial e uma tabela dinâmica consolidada. Além disso, o script oferece a opção de envio automático por e-mail.
+**Proposal Data Automation** é um projeto Python desenvolvido para automatizar o processamento de dados de propostas e gerar relatórios detalhados em arquivos Excel. O script organiza os dados em abas específicas, formata tabelas para análise, e inclui a opção de envio automático por e-mail.
 
-Funcionalidades
+---
 
-Processamento Automático de Arquivos Excel: Localiza automaticamente o arquivo mais recente na pasta de entrada.
+## Funcionalidades Principais
 
-Organização dos Dados:
+### 1. Processamento Automático
+- Identifica e processa automaticamente o arquivo mais recente na pasta de entrada.
 
-Cria uma aba para os dados brutos (Raw Data).
+### 2. Organização dos Dados
+- **Raw Data**: Aba com os dados brutos reorganizados.
+- **Team A e Team B**: Dados separados com base em unidades associadas a cada equipe.
+- **Filiais**: Abas específicas criadas para cada filial encontrada nos dados.
+- **Consolidated Pivot**: Tabela dinâmica consolidada agrupando os dados por filial e status.
 
-Gera abas separadas para Team A e Team B com base em unidades predefinidas.
+### 3. Formatação e Relatórios
+- Todas as abas são formatadas como tabelas dinâmicas do Excel para facilitar a navegação e a análise.
 
-Cria abas separadas para cada filial encontrada nos dados.
+### 4. Envio Automático por E-mail
+- O arquivo gerado pode ser enviado automaticamente para uma lista de destinatários configurável.
 
-Gera uma aba de tabela dinâmica consolidada (Consolidated Pivot).
+---
 
-Formatação de Tabelas: Todas as abas geradas são formatadas como tabelas dinâmicas do Excel para facilitar a análise.
+## Requisitos de Instalação
 
-Envio por E-mail: Permite enviar o arquivo Excel gerado para uma lista de destinatários configuráveis.
+### 1. Versão do Python
+- **Python 3.8 ou superior.**
 
-Requisitos
+### 2. Bibliotecas Necessárias
+- `pandas`
+- `openpyxl`
+- `smtplib`
 
-Python 3.8 ou superior.
-
-Bibliotecas necessárias:
-
-pandas
-
-openpyxl
-
-smtplib
-
-Para instalar as dependências, execute:
-
+Instale as dependências executando o comando abaixo:
+```bash
 pip install pandas openpyxl
+```
 
-Configuração
+---
 
-Certifique-se de que os arquivos Excel a serem processados estejam localizados na pasta configurada como entrada:
+## Configuração Inicial
 
-INPUT_FOLDER = 'C:\\AutomationProject\\Input'
+### 1. Diretórios de Trabalho
+- **Pasta de Entrada**: Onde os arquivos Excel a serem processados devem estar localizados.
+  ```python
+  INPUT_FOLDER = 'C:\\AutomationProject\\Input'
+  ```
+- **Pasta de Saída**: Onde o arquivo Excel gerado será salvo.
+  ```python
+  OUTPUT_PATH = 'C:\\AutomationProject\\Output\\Proposals.xlsx'
+  ```
+- **Arquivo de Dados**: Caminho do arquivo que contém dados de funcionários ativos.
+  ```python
+  DATA_PATH = 'C:\\AutomationProject\\Data\\ActiveEmployees.xlsx'
+  ```
 
-Configure o caminho de saída para o arquivo gerado:
+### 2. Configurações de Equipes
+- Ajuste as unidades associadas a cada equipe conforme necessário:
+  ```python
+  team_a_units = ["UnitA", "UnitB", "UnitC", "UnitD", "UnitE"]
+  team_b_units = ["UnitF", "UnitG", "UnitH", "UnitI", "UnitJ"]
+  ```
 
-OUTPUT_PATH = 'C:\\AutomationProject\\Output\\Proposals.xlsx'
+### 3. Configurações de E-mail
+- Configure as credenciais e destinatários:
+  ```python
+  sender_email = 'automation@example.com'
+  sender_password = 'yourpassword'
+  recipients = ['recipient1@example.com', 'recipient2@example.com']
+  smtp_server = 'smtp.example.com'
+  ```
 
-Configure o caminho para o arquivo de dados de funcionários ativos:
+---
 
-DATA_PATH = 'C:\\AutomationProject\\Data\\ActiveEmployees.xlsx'
+## Como Usar
 
-Ajuste as unidades associadas a Team A e Team B conforme necessário:
+1. **Clone o Repositório**
+   ```bash
+   git clone https://github.com/seu-usuario/proposal-data-automation.git
+   cd proposal-data-automation
+   ```
 
-team_a_units = ["UnitA", "UnitB", "UnitC", "UnitD", "UnitE"]
-team_b_units = ["UnitF", "UnitG", "UnitH", "UnitI", "UnitJ"]
+2. **Execute o Script Principal**
+   ```bash
+   python main.py
+   ```
 
-Configure as informações de e-mail para envio automático:
+3. **Resultados**:
+   - O arquivo Excel gerado será salvo no diretório configurado no `OUTPUT_PATH`.
+   - Após a geração, você será solicitado a confirmar o envio do arquivo por e-mail.
 
-sender_email = 'automation@example.com'
-sender_password = 'yourpassword'
-recipients = ['recipient1@example.com', 'recipient2@example.com']
-smtp_server = 'smtp.example.com'
+---
 
-Como Executar
+## Estrutura do Arquivo Gerado
 
-Clone o repositório para sua máquina local:
+- **Raw Data**: Dados brutos reordenados e com duplicatas removidas.
+- **Team A**: Dados filtrados com base nas unidades associadas a `team_a_units`.
+- **Team B**: Dados filtrados com base nas unidades associadas a `team_b_units`.
+- **Filiais**: Abas individuais criadas para cada filial (baseadas na coluna `Unit`).
+- **Consolidated Pivot**: Tabela dinâmica consolidada agrupando os dados por filial e status.
 
-git clone https://github.com/seu-usuario/proposal-data-automation.git
-cd proposal-data-automation
+Todas as abas são formatadas como tabelas dinâmicas para otimizar a análise.
 
-Execute o script principal:
+---
 
-python main.py
+## Contribuições
 
-O arquivo Excel gerado será salvo no diretório especificado no parâmetro OUTPUT_PATH.
+Contribuições são sempre bem-vindas! Para relatar problemas, sugerir melhorias ou enviar pull requests, utilize a aba ["Issues"](https://github.com/seu-usuario/proposal-data-automation/issues) no repositório.
 
-Após a geração, você será solicitado a confirmar o envio do arquivo por e-mail.
+---
 
-Estrutura do Arquivo Excel
+## Licença
 
-O arquivo gerado contém as seguintes abas:
+Este projeto está licenciado sob a [MIT License](https://opensource.org/licenses/MIT).
 
-Raw Data: Dados brutos com colunas reordenadas e duplicatas removidas.
+---
 
-Team A: Dados filtrados para unidades específicas predefinidas em team_a_units.
+## Autor
 
-Team B: Dados filtrados para unidades específicas predefinidas em team_b_units.
+- **Gabriel Matuck**  
+  - **E-mail**: [gabriel.matuck1@gmail.com](mailto:gabriel.matuck1@gmail.com)
 
-Filiais: Abas individuais criadas para cada filial (baseadas na coluna Unit).
-
-Consolidated Pivot: Uma tabela dinâmica consolidada que agrupa dados por filial (Unit) e status (Status).
-
-Todas as abas são formatadas como tabelas dinâmicas para facilitar a navegação e a organização.
-
-Contribuições
-
-Contribuições são bem-vindas! Para relatar problemas, sugerir melhorias ou enviar pull requests, utilize a aba "Issues" no repositório.
-
-Licença
-
-Este projeto está licenciado sob a MIT License.
-
-Autor: Gabriel Matuck
-
-Contato: gabriel.matuck1@gmail.com
